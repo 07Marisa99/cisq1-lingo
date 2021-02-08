@@ -16,10 +16,9 @@ jobs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
        
-   # Checks out a copy of your repository on the ubuntu-latest machine
-   - name: Checkout code
-     uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
      
    # running maven
-   - name: mavenRun
-     run: mvn -B verify -Dspring.profiles.active=ci
+    - name: mavenRun
+      run: mvn -B verify -Dspring.profiles.active=ci
