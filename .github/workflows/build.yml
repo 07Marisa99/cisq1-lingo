@@ -1,0 +1,25 @@
+name: CI
+
+# Run this workflow every time a new commit pushed to your repository
+on: push
+
+jobs:
+  # Set the job key. The key is displayed as the job name
+  # when a job name is not provided
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Cache Maven packages
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+       
+     # Checks out a copy of your repository on the ubuntu-latest machine
+     - name: Checkout code
+       uses: actions/checkout@v2
+     
+     # running maven
+     - name: mavenRun
+       run: mvn -B verify -Dspring.profiles.active=ci
